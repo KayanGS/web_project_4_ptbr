@@ -43,6 +43,15 @@
           </ul>
       </section>
 
+      <template id="elementTemplate">
+        <div class="element__item">
+          <img class="element__image" src="" alt="">
+          <p class="element__legend-text"></p>
+          <button class="element__like-icon"></button>
+          <button class="element__delete-icon"></button>
+        </div>
+      </template>
+
       <div class="popup-profile__container popup__container">
         <form class="popup-profile__form">
           <h3 class="popup__title">Editar perfil</h3>
@@ -60,6 +69,12 @@
         <input class="popup__text popup-image__url" type="text" name="url" value="URL da imagem">
         <input class="popup-image__save popup__save" type="submit" value="">
         <div class="popup-image__close popup__close"></div>
+        <!--Test -->
+        <form class="popup-image__form">
+          <input type="text" class="popup-image__legend" placeholder="Legend">
+          <input type="text" class="popup-image__url" placeholder="Image URL">
+          <button class="popup-image__save">Save</button>
+        </form>
       </div>
 
       <div class="popup__open">

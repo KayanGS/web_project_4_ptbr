@@ -45,13 +45,6 @@ popupImageOpen.addEventListener('click', function() {
   popupImageContainer.classList.add('popup__container_active');
 });
 
-popupImageClose.addEventListener('click', function() {
-  overlay.classList.remove('popup__overlay_active');
-  popupImageContainer.classList.remove('popup__container_active');
-});
-
-
-
 const elementData = [
   {
     imageSrc: './assets/images/yosemite-valey.png',
@@ -83,7 +76,7 @@ const elementData = [
 function populateElementContainer() {
   const elementContainer = document.querySelector('.element__container');
   const elementTemplate = document.getElementById('elementTemplate');
-
+  
   // Loop through the element data and create the elements
   for (const element of elementData) {
     // Clone the template and populate it with data
@@ -97,9 +90,7 @@ function populateElementContainer() {
 
     elementContainer.appendChild(newElement);
   }
-  function populateElementContainer() {
-    // ... (previous code for populating elements)
-
+  
     // Function to toggle the 'clicked' class on the like icon
     function toggleLikeIcon(event) {
       const likeIcon = event.target;
@@ -127,8 +118,73 @@ function populateElementContainer() {
   });
   }
 
-  populateElementContainer();
-
-}
-
+  function populateElementContainer2() {
+    const elementContainer = document.querySelector('.element__container');
+    const elementTemplate = document.getElementById('elementTemplate');
+    
+    // Loop through the element data and create the elements
+  
+      // Clone the template and populate it with data
+      const newElement = elementTemplate.content.cloneNode(true);
+      elementContainer.appendChild(newElement);
+      // Function to toggle the 'clicked' class on the like icon
+      function toggleLikeIcon(event) {
+        const likeIcon = event.target;
+        likeIcon.classList.toggle('clicked');
+      }
+  
+      // Attach click event listeners to the like icons
+      const likeIcons = document.querySelectorAll('.element__like-icon');
+      likeIcons.forEach(likeIcon => {
+        likeIcon.addEventListener('click', toggleLikeIcon);
+      });
+  
+       // Function to remove an element when the trash can icon is clicked
+    function removeElement(event) {
+      const elementItem = event.target.closest('.element__item');
+      if (elementItem) {
+        elementItem.remove();
+      }
+    }
+  
+    // Attach click event listeners to the delete icons
+    const deleteIcons = document.querySelectorAll('.element__delete-icon');
+    deleteIcons.forEach(deleteIcon => {
+      deleteIcon.addEventListener('click', removeElement);
+    });
+    }
+  popupProfileForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    overlay.classList.remove('popup__overlay_active');
+    popupProfileContainer.classList.remove('popup__container_active');
+    let nameInput = document.querySelector('.popup__name').value;
+    let profInput = document.querySelector('.popup__profession').value;
+    profileNameElement.textContent = nameInput;
+    profileProfessionElement.textContent = profInput;
+  });
+  
+  popupImageClose.addEventListener('click', function() {
+    overlay.classList.remove('popup__overlay_active');
+    popupImageContainer.classList.remove('popup__container_active');
+  });
+  
+  popupImageContainer.querySelector('.popup-image__form').addEventListener('submit', function(event) {
+    event.preventDefault();
+  
+    const legendInput = document.querySelector('.popup-image__legend').value;
+    const urlInput = document.querySelector('.popup-image__url').value;
+    
+    if (legendInput && urlInput) {
+      const newElement = {
+        imageSrc: urlInput,
+        legend: legendInput
+      };
+  
+      elementData.push(newElement);
+      populateElementContainer2();
+  
+      overlay.classList.remove('popup__overlay_active');
+      popupImageContainer.classList.remove('popup__container_active');
+    }
+  });
 populateElementContainer();
